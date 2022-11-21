@@ -1,0 +1,34 @@
+Misiones
+- Encontrar tres renos extraviados
+- Atrapar renos
+- Llevarlos al taller/establo
+
+- Encontrar las herramientas de santa
+- Llevarlas al taller
+
+- Ayudar con la producción de regalos
+
+- Reparar el trineo de santa
+ -> Encontrar/comprar las herramientas para hacerlo
+
+- Recoger ultimas cartas para santa
+
+- Misiones para obtener algo de la tienda (Favores)
+
+Niveles, dias y/o escenarios: 4 o 5
+Tiempo: 15 minutos sean un 1 dia
+
+Ganas si completas todas las misiones antes de que se acaben los 5 dias (1hr 15 mins)
+
+Escenarios:
+- Taller de santa
+- Exterior del taller
+- Villa/Pueblo cercano
+- Tienda en la villa
+- Oficina de santa
+
+
+
+Assets:
+https://unityassetcollection.com/?s=christmas
+https://hitfile.net/download/free/fRDL1pL# (Descargar desde https://anydebrid.com)
