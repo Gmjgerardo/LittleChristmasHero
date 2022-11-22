@@ -32,3 +32,6 @@ Escenarios:
 Assets:
 https://unityassetcollection.com/?s=christmas
 https://hitfile.net/download/free/fRDL1pL# (Descargar desde https://anydebrid.com)
+
+https://assetstore.unity.com/packages/vfx/shaders/1up-snow-shader-148366
+https://unityassetcollection.com/1up-snow-shader-free-download/
