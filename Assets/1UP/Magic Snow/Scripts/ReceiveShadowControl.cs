@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReceiveShadowControl : MonoBehaviour
 {
     bool receiveShadow = false;
-    Renderer renderer = null;
+    new Renderer renderer = null;
     // Start is called before the first frame update
     void Start()
     {
