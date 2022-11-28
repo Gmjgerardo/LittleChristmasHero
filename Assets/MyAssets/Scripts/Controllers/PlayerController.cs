@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _playerRB;
 
-    //private PlayerAnimation _playerAnimation;
+    private PlayerAnimation _playerAnimation;
 
     private bool _isRunnning = false;
     private float _maxMovementSpeed = 10f;
@@ -39,12 +39,11 @@ public class PlayerController : MonoBehaviour
             }
         #endregion
         #region Obtener Animacion
-        //_playerAnimation = GetComponent<PlayerAnimation>();
+        _playerAnimation = GetComponent<PlayerAnimation>();
 
-        //if (_playerAnimation == null)
-        //{
-        //    Debug.LogWarning("El jugador no tiene un controlador de animaci?n");
-        //}
+        if (_playerAnimation == null) {
+            Debug.LogWarning("El jugador no tiene un controlador de animaci?n");
+            }
         #endregion
 
         if (_isRunnning) {
@@ -74,7 +73,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(movement * Time.deltaTime * _MovementSpeed);
         float velocity = Mathf.Max(Mathf.Abs(_horizontalInput), Mathf.Abs(_fowardInput));
         velocity *= _MovementSpeed / _maxMovementSpeed;
-//        _playerAnimation.setSpeed(velocity);
+        _playerAnimation.setSpeed(velocity);
         #endregion
         #region Peticion Brinco
         if (Input.GetKeyDown(KeyCode.Space) && _availableJumps > 0) {

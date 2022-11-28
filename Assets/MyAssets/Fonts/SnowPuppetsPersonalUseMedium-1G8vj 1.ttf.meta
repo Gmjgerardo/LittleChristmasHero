@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 08c821c6fa2c07b4ab78b851e3ab040b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Snow Puppets Personal Use
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0c6030df3e705de419215396b1931411, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

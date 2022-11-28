@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
-
     public void LoadGame() {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("WorkshopOutside");
         }
     public void LoadMainMenu() {
         SceneManager.LoadScene("MainMenu");
