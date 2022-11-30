@@ -92,29 +92,24 @@ public class DialogueController : MonoBehaviour
         #endregion
     }
 
-    private void continueDialogue()
-    {
-        if(_dialogueIdx == _dialogueList.Count - 1)
-        {
+    private void continueDialogue() {
+        if(_dialogueIdx == _dialogueList.Count - 1) {
             Debug.Log("Se termina el diálogo con " + _name);
             _dialoguePnl.SetActive(false);
-        }
-        else if(_dialogueIdx == _dialogueList.Count - 2) // Penúltimo
-        {
+            }
+        // Penúltimo 
+        else if (_dialogueIdx == _dialogueList.Count - 2) {
             _dialogueIdx++;
             showDialogue();
             _NextTMP.text = "Salir";
-        }
-        else
-        {
+            }
+        else {
             _dialogueIdx++;
             showDialogue();
+            }
+        }
+
+    public void showDialogue() {
+        _dialogueTMP.text = _dialogueList[_dialogueIdx];
         }
     }
-
-    public void showDialogue()
-    {
-        Debug.Log("Diálogo: #" + _dialogueIdx);
-        _dialogueTMP.text = _dialogueList[_dialogueIdx];
-    }
-}
