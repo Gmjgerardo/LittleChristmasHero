@@ -4,26 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Clock : MonoBehaviour
-{
-    public TextMeshProUGUI contador;
-    private float tiempo = 60f;
+public class Clock : MonoBehaviour {
+    [SerializeField]
+    private TextMeshProUGUI contador;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    #region Variables para controlar el tiempo de actualizado de la UI
+    private float _nextActionTime = 0.0f;    // En que momento se ejecutara por primera vez (1f despues de un segundo)
+    [SerializeField]
+    private float _period = 1f; // Cada segundo se actualizara
+
+    private float tiempo = 60f;
+    #endregion
+
+    private void Start() {
         contador.text = "00:" + tiempo;
         
         //ActualizarClock(tiempo);
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        tiempo--; ;
-        contador.text = "00:" + tiempo.ToString("f0");
-        if (tiempo == 0) tiempo = 60f;
-        
+    private void Update() {
+        if (Time.time > _nextActionTime) {
+            _nextActionTime += _period;
+            tiempo--;
+            contador.text = "00:" + tiempo.ToString("f0");
+            if (tiempo == 0) tiempo = 60f;
+            }
+        }
     }
-}

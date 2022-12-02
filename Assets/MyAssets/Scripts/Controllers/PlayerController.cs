@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation _playerAnimation;
 
     private bool _isRunnning = false;
-    private float _maxMovementSpeed = 10f;
+    private float _maxMovementSpeed = 7f;
 
     private void Start() {
         #region Obtener Rigidbody
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             _MovementSpeed = _maxMovementSpeed;
             }
         else {
-            _MovementSpeed = _maxMovementSpeed * 0.4f;
+            _MovementSpeed = _maxMovementSpeed * 0.52f;
             }
     }
 
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
                 _MovementSpeed = _maxMovementSpeed;
                 }
             else {
-                _MovementSpeed = _maxMovementSpeed * 0.4f;
+                _MovementSpeed = _maxMovementSpeed * 0.52f;
                 }
             }
 
@@ -69,11 +69,11 @@ public class PlayerController : MonoBehaviour
         _horizontalInput = Input.GetAxis("Horizontal");
         _fowardInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(_horizontalInput, 0, _fowardInput); //Y: Izquierda y derecha Z: Adelante
-        transform.Translate(movement * Time.deltaTime * _MovementSpeed);
+        Vector3 movement = new(_horizontalInput, 0, _fowardInput); //Y: Izquierda y derecha Z: Adelante
+        transform.Translate(_MovementSpeed * Time.deltaTime * movement);
         float velocity = Mathf.Max(Mathf.Abs(_horizontalInput), Mathf.Abs(_fowardInput));
         velocity *= _MovementSpeed / _maxMovementSpeed;
-        _playerAnimation.setSpeed(velocity);
+        _playerAnimation.SetSpeed(velocity);
         #endregion
         #region Peticion Brinco
         if (Input.GetKeyDown(KeyCode.Space) && _availableJumps > 0) {

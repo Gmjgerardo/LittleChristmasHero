@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour {
             }
         }
 
-    public void setSpeed(float speed) {
+    public void SetSpeed(float speed) {
         _playrAnimator.SetFloat("Speed", speed);
         }
     }

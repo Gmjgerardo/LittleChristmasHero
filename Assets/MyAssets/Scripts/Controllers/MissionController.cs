@@ -14,8 +14,8 @@ public class MissionController : MonoBehaviour {
     #endregion
 
     #region Componentes de la misión
-    private string _tituloMision, _descripcionMision;
-    private List<string> _listaMisiones = new List<string>();
+    private InfoMision _mision;
+    private string _listaMisiones = "";
     #endregion
 
     void Start() {
@@ -48,38 +48,49 @@ public class MissionController : MonoBehaviour {
             Debug.LogWarning("Checa los botones");
             }
         else {
-            _aceptarBtn.onClick.AddListener(delegate { aceptarMision(); });
-            _cerrarBtn.onClick.AddListener(delegate { cerrarPanelNuevaMision(); });
+            _aceptarBtn.onClick.AddListener(delegate { AceptarMision(); });
+            _cerrarBtn.onClick.AddListener(delegate { CerrarPanelNuevaMision(); });
         }
         #endregion
 
 
         }
 
-    public void setNuevaMision(string title, string description) {
-        _tituloMision = title;
-        _descripcionMision = description;
+    public void SetNuevaMision(InfoMision mision) {
+        _mision = mision;
 
-        _tituloTMP.text = _tituloMision;
-        _descripcionTMP.text = _descripcionMision;
-        _nuevaMisionPnl.SetActive(true);
-        }
+        if (_mision.GetEstado() > 0) {
+            // En caso de ser nueva mision
+            if(_mision.GetEstado() == 1)
+                _mision.SetEstado(0); // Evitar que se muestre cuando se termina el dialogo con otro npc
+            // Misión ya aceptada
+            else {
+                TextMeshProUGUI headerTMP = _nuevaMisionPnl.GetComponentInChildren<TextMeshProUGUI>();
+                _aceptarBtn.transform.GetComponentInChildren<TextMeshProUGUI>().text = "Listo";
+                headerTMP.text = "MISION";
+                }
 
-    private void aceptarMision() {
-        string misionesStr = "";
-        // Inicializar elmentos/objetos relacionados a la misión (renos)
-        
-        _listaMisiones.Add(_tituloMision);
-
-        foreach(string mision in _listaMisiones) {
-            misionesStr += mision + "\n";
+            _tituloTMP.text = _mision.GetTitulo();
+            _descripcionTMP.text = _mision.GetDescripcion();
+            _nuevaMisionPnl.SetActive(true);
             }
-
-        __misionesTMP.text = misionesStr;
-        cerrarPanelNuevaMision();
         }
 
-    private void cerrarPanelNuevaMision() {
+    private void AceptarMision() {
+        if(_mision.GetEstado() < 2) {
+            // Añadir una linea mas a la "lista" de misiones activas
+            _listaMisiones += _mision.GetTitulo() + "\n";
+
+            __misionesTMP.text = _listaMisiones; // Cambiar el texto en la UI
+
+            // Cambiar estado de la misión
+            _mision.SetEstado(2);
+        }
+
+        CerrarPanelNuevaMision();
+        }
+
+    private void CerrarPanelNuevaMision() {
         _nuevaMisionPnl.SetActive(false);
         }
 

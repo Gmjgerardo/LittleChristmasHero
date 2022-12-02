@@ -15,3 +15,4 @@ MonoBehaviour:
   titulo: Encuentra a los renos
   descripcion: Oh no, los renos de santa han escapado y se encuentran extraviados
     en alguna parte del mapa
+  _estadoMision: 0
