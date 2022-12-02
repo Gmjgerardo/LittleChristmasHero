@@ -23,6 +23,9 @@ public class DialogueController : MonoBehaviour
     private int _dialogueIdx;
     #endregion
 
+    public delegate void emitirDialogoFinalizado();
+    public event emitirDialogoFinalizado OnFinishDialogue;
+
     void Start()
     {
         #region comprobar asignacion del panel de dialogo
@@ -61,7 +64,7 @@ public class DialogueController : MonoBehaviour
         _NextBtn = _dialoguePnl.transform.GetChild(2).GetComponent<Button>();
         
         if(_NextBtn != null) {
-            _NextBtn.onClick.AddListener(delegate { continueDialogue(); });
+            _NextBtn.onClick.AddListener(delegate { ContinueDialogue(); });
             _NextTMP = _NextBtn.transform.GetComponentInChildren<TextMeshProUGUI>();
 
             if(_NextTMP != null) {
@@ -76,7 +79,7 @@ public class DialogueController : MonoBehaviour
         #endregion
     }
 
-    public void setDialogue(string name, string[] dialogue)
+    public void SetDialogue(string name, string[] dialogue)
     {
         #region Inicializar variables
         _name = name;
@@ -86,30 +89,33 @@ public class DialogueController : MonoBehaviour
         #endregion
         #region Primer contacto
         _nameTMP.text = _name;
-        showDialogue();
+        ShowDialogue();
         _NextTMP.text = "Continuar";
         _dialoguePnl.SetActive(true);
         #endregion
     }
 
-    private void continueDialogue() {
+    private void ContinueDialogue() {
+        // No hay mas dialogos
         if(_dialogueIdx == _dialogueList.Count - 1) {
-            Debug.Log("Se termina el diálogo con " + _name);
             _dialoguePnl.SetActive(false);
-            }
+
+            // Verificar que haya métodos "suscritos" (if != null:OnFinishDialogue();)
+            OnFinishDialogue?.Invoke(); // Invoca el evento
+        }
         // Penúltimo 
         else if (_dialogueIdx == _dialogueList.Count - 2) {
             _dialogueIdx++;
-            showDialogue();
+            ShowDialogue();
             _NextTMP.text = "Salir";
             }
         else {
             _dialogueIdx++;
-            showDialogue();
+            ShowDialogue();
             }
         }
 
-    public void showDialogue() {
+    public void ShowDialogue() {
         _dialogueTMP.text = _dialogueList[_dialogueIdx];
         }
     }
