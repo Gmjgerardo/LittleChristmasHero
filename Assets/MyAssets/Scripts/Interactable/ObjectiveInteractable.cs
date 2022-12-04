@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // Clase para las misiones de encontrar
 public class ObjectiveInteractable : Interactable {
@@ -8,6 +9,8 @@ public class ObjectiveInteractable : Interactable {
     private Mision _mision;
     [SerializeField]
     private Mesh _regaloAbierto;
+    [SerializeField]
+    private UnityEvent _accionFinalizar;
 
     private GameObject objetoPadre;
     private MissionController _missionController;
@@ -22,6 +25,10 @@ public class ObjectiveInteractable : Interactable {
             if (_mision.GetDesencadena() != null) {
                 Invoke(nameof(DesencadenarMision), 5);
                 }
+
+            // Ejecutar la acción/disparador de terminado en caso de tener una
+            if (_accionFinalizar.GetPersistentEventCount() > 0)
+                _accionFinalizar.Invoke();
 
             _missionController.BorrarMision(_mision.GetIndicacion());
             }

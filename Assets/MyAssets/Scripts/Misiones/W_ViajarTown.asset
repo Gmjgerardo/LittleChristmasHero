@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: W_ViajarTown
   m_EditorClassIdentifier: 
   titulo: Renos en el pueblo
-  descripcion: "La informaci\xF3n revelada por  Krompy "
+  descripcion: "El malhumorado Kroumpy revelo que vio algunos renos en direcci\xF3n
+    al pueblo y cree que su primo Peter el mu\xF1eco de nieve podria ayudarte a encontrar
+    a los renos restantes."
   indicacion: "Dirigete hacia el pueblo y habla con Peter el mu\xF1eco de nieve"
+  pista: 
   _estadoMision: 0
   _activaMision: {fileID: 0}

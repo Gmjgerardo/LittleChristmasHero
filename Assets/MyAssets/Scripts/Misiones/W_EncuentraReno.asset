@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb400f514a4d58d4daf4717ea3cb5f25, type: 3}
   m_Name: W_EncuentraReno
   m_EditorClassIdentifier: 
-  titulo: Encuentra a los renos 2/5
-  descripcion: Ve por el reno
-  indicacion: Encuentra al reno de Santa
-  _estadoMision: 0
+  titulo: Encuentra a los renos 1/5
+  descripcion: Los renos de Santa Claus son muy traviesos y se ocultaron en regalos
+    de navidad en diferentes partes del polo norte y el pueblo. Encuentralos antes
+    de que sea muy tarde y se arruine la navidad!.
+  indicacion: Encuentra uno de los  renos de Santa
+  pista: El amplio jardin trasero del pinguino Larry
+  _estadoMision: 1
   _activaMision: {fileID: 0}

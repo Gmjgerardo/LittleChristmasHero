@@ -76,7 +76,7 @@ public class MissionController : MonoBehaviour {
             }
 
         _tituloTMP.text = _mision.GetTitulo();
-        _descripcionTMP.text = _mision.GetDescripcion();
+        _descripcionTMP.text = _mision.GetDescripcion() + "\nPista: " + _mision.GetPista();
         }
 
     private void AceptarMision() {
@@ -94,12 +94,12 @@ public class MissionController : MonoBehaviour {
         }
 
     public void BorrarMision(string mBorrar) {
-        Debug.Log("Se va a borrar" + mBorrar);
         string[] misiones = _listaMisiones.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        Debug.Log("Se encontraron " + misiones.Length + " Misiones");
         _listaMisiones = "";
 
         foreach(string mision in misiones) {
-            if(mision != mBorrar)
+            if(mision != "\n" && mision != mBorrar)
                 _listaMisiones += mision + "\n";
                 }
 

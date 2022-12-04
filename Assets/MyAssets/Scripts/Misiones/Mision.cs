@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "Nueva Mision", menuName = "Mision")]
 
 public class Mision : ScriptableObject {
     [SerializeField]
-    private string titulo, descripcion, indicacion;
+    private string titulo, descripcion, indicacion, pista;
     [SerializeField]
     private int _estadoMision = 0; // 0: No encontrada, 1: Aceptada, 2: Terminada
     [SerializeField]
@@ -29,6 +30,10 @@ public class Mision : ScriptableObject {
 
     public int GetEstado() {
         return _estadoMision;
+        }
+
+    public string GetPista() {
+        return pista;
         }
 
     public Mision GetDesencadena() {

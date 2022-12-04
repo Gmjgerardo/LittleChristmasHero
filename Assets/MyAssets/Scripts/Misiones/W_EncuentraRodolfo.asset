@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb400f514a4d58d4daf4717ea3cb5f25, type: 3}
   m_Name: W_EncuentraRodolfo
   m_EditorClassIdentifier: 
-  titulo: Encuentra a los renos 1/5
-  descripcion: Oh no, los renos de santa han escapado y se encuentran extraviados
-    en alguna parte del mapa
+  titulo: Encuentra a los renos 2/5
+  descripcion: Rodolfo es uno de los renos de santa extraviados y ademas es su favorito.
+    Encuentralo a el y a su brillosa nariz roja.
   indicacion: Encuentra a Rodolfo el reno
+  pista: Su alimento favorito son los hongos y musgos
   _estadoMision: 0
-  _activaMision: {fileID: 11400000, guid: 970c660305990f44b853d63967ce5ea6, type: 2}
+  _activaMision: {fileID: 0}
