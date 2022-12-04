@@ -4,11 +4,13 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Nueva Mision", menuName = "Mision")]
 
-public class InfoMision : ScriptableObject {
+public class Mision : ScriptableObject {
     [SerializeField]
-    private string titulo, descripcion;
+    private string titulo, descripcion, indicacion;
     [SerializeField]
-    private int _estadoMision = 0; // 1: Mostrar 2:Aceptada 3:Terminada 0: No mostrar/No aceptada
+    private int _estadoMision = 0; // 0: No encontrada, 1: Aceptada, 2: Terminada
+    [SerializeField]
+    private Mision _activaMision;
 
     private void OnEnable() {
         _estadoMision = 0;
@@ -21,12 +23,21 @@ public class InfoMision : ScriptableObject {
         return descripcion;
         }
 
+    public string GetIndicacion() {
+        return indicacion;    
+        }
+
     public int GetEstado() {
         return _estadoMision;
         }
 
+    public Mision GetDesencadena() {
+        return _activaMision;
+        }
+
     public void CompletarMision() {
-        _estadoMision = 3;
+        // Marcar misión como terminada
+        _estadoMision = 2;
         }
 
     public void SetEstado(int estado) {

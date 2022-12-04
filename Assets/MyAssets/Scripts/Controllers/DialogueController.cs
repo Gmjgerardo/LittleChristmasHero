@@ -24,41 +24,35 @@ public class DialogueController : MonoBehaviour
     #endregion
 
     public delegate void emitirDialogoFinalizado();
-    public event emitirDialogoFinalizado OnFinishDialogue;
+    public static event emitirDialogoFinalizado OnFinishDialogue;
 
-    void Start()
-    {
+    void Start() {
         #region comprobar asignacion del panel de dialogo
-        if(_dialoguePnl == null)
-        {
+        if(_dialoguePnl == null) {
             Debug.LogError("No se arrastro el panel de dialogos al dialogueController (Script)");
-        }
+            }
         #endregion
         #region Obtener Texto del dialogo
         // Primer hijo
         _dialogueTMP = _dialoguePnl.transform.GetComponentInChildren<TextMeshProUGUI>(); // Busqueda recursiva
 
 
-        if(_dialogueTMP != null)
-        {
+        if(_dialogueTMP != null) {
             _dialogueTMP.text = "Obtenido dialogueTMP";
-        } else
-        {
+            } else {
             Debug.LogWarning("No se encontro un TMP como hijo del panel");
-        }
+            }
         #endregion
         #region Obtener Texto del nombre
         // Obtener el hijo del segundo hijo del panel
         _nameTMP = _dialoguePnl.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
 
-        if (_nameTMP != null)
-        {
+        if (_nameTMP != null) {
             _nameTMP.text = "Nombresito";
-        }
-        else
-        {
+            }
+        else {
             Debug.LogWarning("No se encontro un TMP como hijo del panel de nombre");
-        }
+            }
         #endregion
         #region Obtener Texto del botón
         _NextBtn = _dialoguePnl.transform.GetChild(2).GetComponent<Button>();
@@ -79,8 +73,7 @@ public class DialogueController : MonoBehaviour
         #endregion
     }
 
-    public void SetDialogue(string name, string[] dialogue)
-    {
+    public void SetDialogue(string name, string[] dialogue) {
         #region Inicializar variables
         _name = name;
         _dialogueList = new List<string>(dialogue.Length);
@@ -93,7 +86,7 @@ public class DialogueController : MonoBehaviour
         _NextTMP.text = "Continuar";
         _dialoguePnl.SetActive(true);
         #endregion
-    }
+        }
 
     private void ContinueDialogue() {
         // No hay mas dialogos

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MissionController : MonoBehaviour {
     [SerializeField]
@@ -14,11 +15,14 @@ public class MissionController : MonoBehaviour {
     #endregion
 
     #region Componentes de la misión
-    private InfoMision _mision;
+    private Mision _mision;
     private string _listaMisiones = "";
     #endregion
 
-    void Start() {
+    private void Start() {
+        // "Suscribir" a la función finalizoDialogo al evento llamado generado por dialoguecontroller
+        DialogueController.OnFinishDialogue += FinalizoDialogo;
+
         if (_missionsPnl == null) {
             Debug.LogError("No se arrastro el panel de misiones");
             }
@@ -52,46 +56,63 @@ public class MissionController : MonoBehaviour {
             _cerrarBtn.onClick.AddListener(delegate { CerrarPanelNuevaMision(); });
         }
         #endregion
-
-
         }
 
-    public void SetNuevaMision(InfoMision mision) {
+    // Función se activa cuando se termina el dialogo con un NPC cualquiera
+    public void FinalizoDialogo() {
+        // Mientras haya una misión cargada en el controlador y que no haya sido terminada
+        if(_mision != null && _mision.GetEstado() != 3)
+            _nuevaMisionPnl.SetActive(true);
+        }
+
+    public void SetNuevaMision(Mision mision) {
         _mision = mision;
 
-        if (_mision.GetEstado() > 0) {
-            // En caso de ser nueva mision
-            if(_mision.GetEstado() == 1)
-                _mision.SetEstado(0); // Evitar que se muestre cuando se termina el dialogo con otro npc
-            // Misión ya aceptada
-            else {
-                TextMeshProUGUI headerTMP = _nuevaMisionPnl.GetComponentInChildren<TextMeshProUGUI>();
-                _aceptarBtn.transform.GetComponentInChildren<TextMeshProUGUI>().text = "Listo";
-                headerTMP.text = "MISION";
-                }
-
-            _tituloTMP.text = _mision.GetTitulo();
-            _descripcionTMP.text = _mision.GetDescripcion();
-            _nuevaMisionPnl.SetActive(true);
+         // Si la misión ya fue aceptada
+        if(_mision.GetEstado() == 1) {
+            TextMeshProUGUI headerTMP = _nuevaMisionPnl.GetComponentInChildren<TextMeshProUGUI>();
+            _aceptarBtn.transform.GetComponentInChildren<TextMeshProUGUI>().text = "Listo";
+            headerTMP.text = "MISION";
             }
+
+        _tituloTMP.text = _mision.GetTitulo();
+        _descripcionTMP.text = _mision.GetDescripcion();
         }
 
     private void AceptarMision() {
-        if(_mision.GetEstado() < 2) {
+        if(_mision.GetEstado() == 0) {
             // Añadir una linea mas a la "lista" de misiones activas
-            _listaMisiones += _mision.GetTitulo() + "\n";
+            _listaMisiones += _mision.GetIndicacion() + "\n";
 
             __misionesTMP.text = _listaMisiones; // Cambiar el texto en la UI
 
             // Cambiar estado de la misión
-            _mision.SetEstado(2);
-        }
+            _mision.SetEstado(1);
+            }
 
         CerrarPanelNuevaMision();
         }
 
+    public void BorrarMision(string mBorrar) {
+        Debug.Log("Se va a borrar" + mBorrar);
+        string[] misiones = _listaMisiones.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+        _listaMisiones = "";
+
+        foreach(string mision in misiones) {
+            if(mision != mBorrar)
+                _listaMisiones += mision + "\n";
+                }
+
+        __misionesTMP.text = _listaMisiones;
+    }
+
     private void CerrarPanelNuevaMision() {
         _nuevaMisionPnl.SetActive(false);
+        _mision = null;
         }
 
+    // Eliminar referencia al evento cuando se destruye o desactiava el objeto
+    private void OnDisable() {
+        DialogueController.OnFinishDialogue -= FinalizoDialogo;
+        }
     }

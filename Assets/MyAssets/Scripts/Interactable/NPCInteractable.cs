@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCInteractable : Interactable
-{
+public class NPCInteractable : Interactable {
     [SerializeField]
     private string _name;
 
@@ -13,12 +12,11 @@ public class NPCInteractable : Interactable
     private MissionController _missionController;
 
     [SerializeField]
-    private InfoMision _mision;
+    private Mision _mision;
     private bool _estadoInteraccion = true;
 
     public override void Interact() {
         //base.Interact();    // Es lo mismo que llamar al método padre
-        //Debug.Log("10.- Interactuando con un NPC");
         if(_estadoInteraccion) { 
             _dialogueController.SetDialogue(_name, _dialogue);
             _estadoInteraccion = false;
@@ -26,14 +24,7 @@ public class NPCInteractable : Interactable
             _dialogueController.SetDialogue(_name, new string[] { "Nada nuevo..." });
             }
 
-        if(_mision != null && _mision.GetEstado() == 0) {
-            _mision.SetEstado(1); // Permite mostrar la misión de ese NPC
-            }
-        }
-
-    // Función se activa cuando se termina el dialogo con un NPC cualquiera
-    private void FinalizoDialogo() {
-        if (_mision != null) {
+        if(_mision != null && _mision.GetEstado() != 2) {
             _missionController.SetNuevaMision(_mision);
             }
         }
@@ -49,13 +40,5 @@ public class NPCInteractable : Interactable
         if (!_missionController) {
             Debug.LogError("La escena no tiene un controlador de misiones");
             }
-        else {
-            _dialogueController.OnFinishDialogue += FinalizoDialogo;
-            }
         }
-
-    // Eliminar referencia al evento cuando se destruye o desactiava el objeto
-    private void OnDisable() {
-        _dialogueController.OnFinishDialogue -= FinalizoDialogo;
     }
-}
