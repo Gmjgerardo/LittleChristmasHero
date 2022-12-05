@@ -14,9 +14,21 @@ public class AlertsController : MonoBehaviour {
     private TextMeshProUGUI _alertaTMP;
     private Button _cerrarBtn, _aceptarBtn;
     #endregion
+
+    private Clock _clockController;
+
     private void Start() {
         if (_alertsPnl == null) {
             Debug.LogError("No se arrastro el panel de alertas");
+            }
+
+        _clockController = FindObjectOfType<Clock>();
+        PreservarInformacion info = FindObjectOfType<PreservarInformacion>();
+
+
+        if (_clockController != null) {
+            _agreeAction = new UnityEvent();
+            _agreeAction.AddListener(_clockController.CambiarEstado);
             }
 
         _alertaTMP = _alertsPnl.transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -25,11 +37,17 @@ public class AlertsController : MonoBehaviour {
 
         _aceptarBtn.onClick.AddListener(delegate { AgreeAction(); });
         _cerrarBtn.onClick.AddListener(delegate { CloseAlert(); });
+
+        if(info != null) {
+            if(info.GetContinuarReloj()) {
+                CloseAlert();
+                }
+            }
         }
 
     public void ShowAlert(string mensaje, UnityEvent agreefuncion = null) {
         // Verificar que haya una acción aceptar agregada (función) agreefuncion.GetPersistentEventCount() > 0
-        if (agreefuncion != null && agreefuncion.GetPersistentEventCount() > 0) {
+        if (agreefuncion != null) {
             _agreeAction = agreefuncion;
             _aceptarBtn.gameObject.SetActive(true);
             }
@@ -41,10 +59,13 @@ public class AlertsController : MonoBehaviour {
     public void CloseAlert() {
         _agreeAction = null;
         _alertsPnl.SetActive(false);
+        _cerrarBtn.gameObject.SetActive(true);
         }
 
     public void AgreeAction() {
-        _agreeAction.Invoke();
+        if (_agreeAction != null)
+            _agreeAction.Invoke();
+
         _aceptarBtn.gameObject.SetActive(false);
         CloseAlert();
         }

@@ -42,6 +42,13 @@ public class ObjectiveInteractable : Interactable {
     private void MostrarObjetoMision() {
         transform.GetComponent<MeshRenderer>().enabled = false; // Desactivar objeto caja
         objetoPadre.GetComponent<MeshRenderer>().enabled = true;    // Activar objeto deseado
+
+        // Hacer "volar" a los renos
+        Invoke(nameof(DesaparecerObjetoMision), 1.5f);
+        }
+
+    private void DesaparecerObjetoMision() {
+        objetoPadre.SetActive(false);
         }
 
     private void DesencadenarMision() {

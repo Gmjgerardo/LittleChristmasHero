@@ -4675,6 +4675,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _destino: Polo norte
+  _activado: 1
 --- !u!65 &986485735
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7820,6 +7821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contador: {fileID: 1202991161}
+  _continuar: 1
   _period: 1
 --- !u!1 &1751383171
 GameObject:

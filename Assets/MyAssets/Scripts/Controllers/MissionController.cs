@@ -19,6 +19,8 @@ public class MissionController : MonoBehaviour {
     private string _listaMisiones = "";
     #endregion
 
+    private PreservarInformacion info;
+
     private void Start() {
         // "Suscribir" a la función finalizoDialogo al evento llamado generado por dialoguecontroller
         DialogueController.OnFinishDialogue += FinalizoDialogo;
@@ -54,8 +56,15 @@ public class MissionController : MonoBehaviour {
         else {
             _aceptarBtn.onClick.AddListener(delegate { AceptarMision(); });
             _cerrarBtn.onClick.AddListener(delegate { CerrarPanelNuevaMision(); });
-        }
+            }
         #endregion
+
+        // Verificar si hay información importante guardada
+        info = FindObjectOfType<PreservarInformacion>();
+        if(info != null) {
+            _listaMisiones = info.GetMisiones();
+            __misionesTMP.text = _listaMisiones;
+            }
         }
 
     // Función se activa cuando se termina el dialogo con un NPC cualquiera
@@ -95,11 +104,10 @@ public class MissionController : MonoBehaviour {
 
     public void BorrarMision(string mBorrar) {
         string[] misiones = _listaMisiones.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-        Debug.Log("Se encontraron " + misiones.Length + " Misiones");
         _listaMisiones = "";
 
         foreach(string mision in misiones) {
-            if(mision != "\n" && mision != mBorrar)
+            if(mision.Length > 2 && mision != mBorrar)
                 _listaMisiones += mision + "\n";
                 }
 
@@ -115,4 +123,8 @@ public class MissionController : MonoBehaviour {
     private void OnDisable() {
         DialogueController.OnFinishDialogue -= FinalizoDialogo;
         }
-    }
+
+    private void OnDestroy() {
+        info.GuardarMisiones(_listaMisiones);
+        }
+}

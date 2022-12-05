@@ -29,6 +29,5 @@ public class Transportador : Interactable {
 
     public void CambiarEstado() {
         _activado = !_activado;
-        Debug.LogWarning("El estado ahora es: " + (_activado ? "Verdadero" : "Falso"));
         }
     }

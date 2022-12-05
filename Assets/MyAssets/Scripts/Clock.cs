@@ -7,7 +7,9 @@ using TMPro;
 public class Clock : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI contador;
+    [SerializeField]
     private bool _continuar = false;
+    private PreservarInformacion info;
 
     #region Variables para controlar la ejecución del update cada segundo
     private float _nextActionTime = 0.0f;    // En que momento se ejecutara por primera vez (1f despues de un segundo)
@@ -22,13 +24,21 @@ public class Clock : MonoBehaviour {
 
     private void Start() {
         contador.text = "00:00";
-        _continuar = true;
-        }
+        info = FindObjectOfType<PreservarInformacion>();
+
+        if(info != null) {
+            _continuar = info.GetContinuarReloj();
+            }
+    }
 
     private void Update() {
         if(_continuar) {
             ActualizarReloj();
             }
+        }
+
+    public void CambiarEstado() {
+        _continuar = !_continuar;
         }
 
     private void ActualizarReloj() {
@@ -46,4 +56,10 @@ public class Clock : MonoBehaviour {
             }
         #endregion
     }
+
+    private void OnDestroy() {
+        if(info != null) {
+            info.SetContinuar(_continuar);
+            }
+        }
 }
