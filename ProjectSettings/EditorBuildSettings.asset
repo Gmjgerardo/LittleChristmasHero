@@ -15,9 +15,15 @@ EditorBuildSettings:
     path: Assets/MyAssets/Scenes/Instructions.unity
     guid: c6605b576e1a4e846975b129f90945a8
   - enabled: 1
-    path: Assets/MyAssets/Scenes/Town.unity
+    path: Assets/MyAssets/Scenes/RTown.unity
     guid: 1e2d11e8a94f3a44d953b91eedd2199f
   - enabled: 1
     path: Assets/MyAssets/Scenes/WinScene.unity
     guid: a277f76d58d8e7246a0773b347c1d160
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/Town.unity
+    guid: c9aa6f585ca65b948b8cd94da967c524
+  - enabled: 1
+    path: Assets/MyAssets/Scenes/GameOver.unity
+    guid: 2de1e9f842e5a8646ba6e9ef693b0e36
   m_configObjects: {}

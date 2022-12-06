@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour {
     [SerializeField]
@@ -34,6 +35,9 @@ public class Clock : MonoBehaviour {
     private void Update() {
         if(_continuar) {
             ActualizarReloj();
+            }
+	if (minutos == 0) {
+            SceneManager.LoadScene("GameOver");
             }
         }
 
