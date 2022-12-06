@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb400f514a4d58d4daf4717ea3cb5f25, type: 3}
+  m_Name: W_ViajarTown
+  m_EditorClassIdentifier: 
+  titulo: Renos en el pueblo
+  descripcion: "El malhumorado Kroumpy revelo que vio algunos renos en direcci\xF3n
+    al pueblo y cree que su primo Peter el mu\xF1eco de nieve podria ayudarte a encontrar
+    a los renos restantes."
+  indicacion: "Dirigete hacia el pueblo y habla con Peter el mu\xF1eco de nieve"
+  pista: 
+  _estadoMision: 0
+  _activaMision: {fileID: 0}
